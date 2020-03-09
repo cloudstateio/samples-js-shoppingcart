@@ -17,16 +17,12 @@
 const EventSourced = require("cloudstate").EventSourced;
 
 const entity = new EventSourced(
-  ["shoppingcart/shoppingcart.proto", "shoppingcart/persistence/domain.proto"],
+  ["shoppingcart.proto", "domain.proto"],
   "com.example.shoppingcart.ShoppingCart",
   {
     persistenceId: "shopping-cart",
     snapshotEvery: 5, // Usually you wouldn't snapshot this frequently, but this helps to demonstrate snapshotting
-<<<<<<< HEAD
-    includeDirs: ["./protocols/example"]
-=======
-    includeDirs: ["../../protocols/example"]
->>>>>>> master
+    includeDirs: ["./"]
   }
 );
 
@@ -85,7 +81,6 @@ entity.setBehavior(cart => {
  * Handler for add item commands.
  */
 function addItem(addItem, cart, ctx) {
-<<<<<<< HEAD
   console.log("addItem", addItem);
   // Validation:
   // Make sure that it is not possible to add negative quantities
@@ -94,14 +89,6 @@ function addItem(addItem, cart, ctx) {
     ctx.fail("Cannot add negative quantity to item " + addItem.productId);
   } else {
   // Create the event.    
-=======
-  // Validation:
-  // Make sure that it is not possible to add negative quantities
-  if (addItem.quantity < 1) {
-    ctx.fail("Cannot add negative quantity to item " + addItem.productId);
-  } else {
-  // Create the event.
->>>>>>> master
     const itemAdded = ItemAdded.create({
       item: {
         productId: addItem.productId,
@@ -110,10 +97,7 @@ function addItem(addItem, cart, ctx) {
       }
     });
     // Emit the event.
-<<<<<<< HEAD
     console.log("addItem::emit event", itemAdded);
-=======
->>>>>>> master
     ctx.emit(itemAdded);
     return {};
   }
@@ -123,17 +107,11 @@ function addItem(addItem, cart, ctx) {
  * Handler for remove item commands.
  */
 function removeItem(removeItem, cart, ctx) {
-<<<<<<< HEAD
   console.log("removeItem", removeItem);
   // Validation:
   // Check that the item that we're removing actually exists.
   const existing = cart.items.find(item => {
     console.log("removeItem:: return existing");
-=======
-  // Validation:
-  // Check that the item that we're removing actually exists.
-  const existing = cart.items.find(item => {
->>>>>>> master
     return item.productId === removeItem.productId;
   });
 
@@ -154,10 +132,7 @@ function removeItem(removeItem, cart, ctx) {
  * Handler for get cart commands.
  */
 function getCart(request, cart) {
-<<<<<<< HEAD
   console.log("getCart", cart);
-=======
->>>>>>> master
   // Simply return the shopping cart as is.
   return cart;
 }
@@ -166,34 +141,23 @@ function getCart(request, cart) {
  * Handler for item added events.
  */
 function itemAdded(added, cart) {
-<<<<<<< HEAD
   console.log("itemAdded");
   // If there is an existing item with that product id, we need to increment its quantity.
   const existing = cart.items.find(item => {
     console.log("itemAdded::return existing");
-=======
-  // If there is an existing item with that product id, we need to increment its quantity.
-  const existing = cart.items.find(item => {
->>>>>>> master
     return item.productId === added.item.productId;
   });
 
   if (existing) {
     existing.quantity = existing.quantity + added.item.quantity;
   } else {
-<<<<<<< HEAD
     console.log("itemAdded::push");
-=======
->>>>>>> master
     // Otherwise, we just add the item to the existing list.
     cart.items.push(added.item);
   }
 
   // And return the new state.
-<<<<<<< HEAD
   console.log("return state");
-=======
->>>>>>> master
   return cart;
 }
 
