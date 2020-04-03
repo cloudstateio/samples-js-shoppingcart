@@ -18,27 +18,26 @@ const path = require("path");
 const should = require('chai').should();
 const grpc = require("grpc");
 const protoLoader = require("@grpc/proto-loader");
-const fs = require("fs");
 const protobuf = require("protobufjs");
 const protobufHelper = require("cloudstate/src/protobuf-helper");
 
 const allIncludeDirs = protobufHelper.moduleIncludeDirs.concat([
-  path.join("..", "..", "protocols", "example")
+  path.join(__dirname, "..", "node_modules", "cloudstate", "proto")
 ]);
 
 const packageDefinition = protoLoader.loadSync(
   [
-    path.join("cloudstate", "entity.proto"),
-    path.join("cloudstate", "event_sourced.proto")
+    path.join( __dirname, "..", "node_modules", "cloudstate" ,"proto", "cloudstate", "entity.proto"),
+    path.join( __dirname, "..", "node_modules", "cloudstate" ,"proto", "cloudstate", "event_sourced.proto")
   ],
   {
-    includeDirs: allIncludeDirs
+    //includeDirs: allIncludeDirs
   });
 const descriptor = grpc.loadPackageDefinition(packageDefinition);
 
 const root = protobufHelper.loadSync([
-  path.join("shoppingcart","shoppingcart.proto"),
-  path.join("shoppingcart","persistence","domain.proto")
+  path.join( __dirname, "..", "shoppingcart.proto"),
+  path.join( __dirname, "..", "domain.proto")
 ], allIncludeDirs);
 
 const ItemAdded = root.lookupType("com.example.shoppingcart.persistence.ItemAdded");
@@ -186,6 +185,7 @@ describe("shopping cart", () => {
     const port = server.start({
       bindPort: 0
     });
+    console.log("descriptor", descriptor);
     discoveryClient = new descriptor.cloudstate.EntityDiscovery("127.0.0.1:" + port, grpc.credentials.createInsecure());
     eventSourcedClient = new descriptor.cloudstate.eventsourced.EventSourced("127.0.0.1:" + port, grpc.credentials.createInsecure());
   });
