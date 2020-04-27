@@ -39,19 +39,19 @@ message Cart {
 service ShoppingCart {
     rpc AddItem(AddLineItem) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/cart/{user_id}/items/add",
+            post: "/com.example.shoppingcart.ShoppingCart/cart/{user_id}/items/add",
             body: "*",
         };
         option (.cloudstate.eventing).in = "items";
     }
 
     rpc RemoveItem(RemoveLineItem) returns (google.protobuf.Empty) {
-        option (google.api.http).post = "/cart/{user_id}/items/{product_id}/remove";
+        option (google.api.http).post = "/com.example.shoppingcart.ShoppingCart/cart/{user_id}/items/{product_id}/remove";
     }
 
     rpc GetCart(GetShoppingCart) returns (Cart) {
         option (google.api.http) = {
-          get: "/carts/{user_id}",
+          get: "/com.example.shoppingcart.ShoppingCart/carts/{user_id}",
           additional_bindings: {
             get: "/carts/{user_id}/items",
             response_body: "items"
@@ -59,3 +59,4 @@ service ShoppingCart {
         };
     }
 }
+
