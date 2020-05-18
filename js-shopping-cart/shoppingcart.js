@@ -22,22 +22,10 @@ const entity = new EventSourced(
   {
     persistenceId: "shopping-cart",
     snapshotEvery: 5, // Usually you wouldn't snapshot this frequently, but this helps to demonstrate snapshotting
-    includeDirs: ["./"]
+    includeDirs: ["./"],
+    serializeFallbackToJson: true // Enables JSON support for persistence
   }
 );
-
-/*
- * Here we load the Protobuf types. When emitting events or setting state, we need to return
- * protobuf message objects, not just ordinary JavaScript objects, so that the framework can
- * know how to serialize these objects when they are persisted.
- *
- * Note this shows loading them dynamically, they could also be compiled and statically loaded.
- */
-const pkg = "com.example.shoppingcart.persistence.";
-const ItemAdded = entity.lookupType(pkg + "ItemAdded");
-const ItemRemoved = entity.lookupType(pkg + "ItemRemoved");
-const Cart = entity.lookupType(pkg + "Cart");
-
 
 /*
  * Set a callback to create the initial state. This is what is created if there is no
@@ -46,7 +34,7 @@ const Cart = entity.lookupType(pkg + "Cart");
  * We can ignore the userId parameter if we want, it's the id of the entity, which is
  * automatically associated with all events and state for this entity.
  */
-entity.setInitial(userId => Cart.create({items: []}));
+entity.setInitial(userId => ({items: []}));
 
 /*
  * Set a callback to create the behavior given the current state. Since there is no state
@@ -68,8 +56,8 @@ entity.setBehavior(cart => {
       RemoveItem: removeItem,
       GetCart: getCart
     },
-    // Event handlers. The name of the event corresponds to the (unqualified) name of the
-    // persisted protobuf message.
+    // Event handlers. The name of the event corresponds to the value of the
+    // type field in the event JSON.
     eventHandlers: {
       ItemAdded: itemAdded,
       ItemRemoved: itemRemoved
@@ -89,13 +77,14 @@ function addItem(addItem, cart, ctx) {
     ctx.fail("Cannot add negative quantity to item " + addItem.productId);
   } else {
   // Create the event.    
-    const itemAdded = ItemAdded.create({
+    const itemAdded = {
+      type: "ItemAdded",
       item: {
         productId: addItem.productId,
         name: addItem.name,
         quantity: addItem.quantity
       }
-    });
+    };
     // Emit the event.
     console.log("addItem::emit event", itemAdded);
     ctx.emit(itemAdded);
@@ -120,9 +109,10 @@ function removeItem(removeItem, cart, ctx) {
     ctx.fail("Item " + removeItem.productId + " not in cart");
   } else {
     // Otherwise, emit an item removed event.
-    const itemRemoved = ItemRemoved.create({
+    const itemRemoved = {
+      type: "ItemRemoved",
       productId: removeItem.productId
-    });
+    };
     ctx.emit(itemRemoved);
     return {};
   }
