@@ -1,2 +1,2 @@
-*.class
-*.log
+node_modules/
+user-function.desc
