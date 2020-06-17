@@ -23,8 +23,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cloudstateio/cloudstate",
-    "directory": "src/samples/js-shopping-cart"
+    "url": "https://github.com/cloudstateio/samples-js-shoppingcart.git",
+    "directory": "shopping-cart"
   },
   "//": "https://npm.community/t/npm-install-does-not-install-transitive-dependencies-of-local-dependency/2264",
   "dependencies": {
