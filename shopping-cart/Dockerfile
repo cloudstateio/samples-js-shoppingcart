@@ -1,15 +1,34 @@
-FROM node:12.16.3-buster-slim
-# Copy and install deps. This is done as a separate step as an optimization, so changes to the programs files
-# don't require the npm install to be redone
-RUN mkdir -p /opt/samples/js-shopping-cart
-RUN mkdir -p /opt/samples/js-shopping-cart/protocols/example
-#COPY node-support /opt/node-support
-COPY package.json /opt/samples/js-shopping-cart/
-RUN cd /opt/samples/js-shopping-cart && npm install
-# Now copy the entire app
-COPY . /opt/samples/js-shopping-cart
-WORKDIR /opt/samples/js-shopping-cart
-#RUN npm run prestart  # CA - TODO: this is giving a proto problem (will circle back to deal)
-# run
+FROM node:12.18.0-buster AS builder
+
+# Run as an unprivileged user
+WORKDIR /home/node
+USER node
+
+# Install app dependencies
+COPY package*.json ./
+RUN npm ci
+
+# Build app
+COPY . .
+RUN npm run build
+
+# Remove dev packages
+RUN npm prune --production
+
+# Create production image
+FROM node:12.18.0-buster-slim
+
+# Run as an unprivileged user
+WORKDIR /home/node
+USER node
+
+# Install app
+COPY package*.json ./
+COPY *.js ./
+COPY *.proto ./
+COPY --from=builder /home/node/node_modules node_modules/
+COPY --from=builder /home/node/user-function.desc .
+
+# Run
 EXPOSE 8080
-CMD ["npm", "run", "start-no-prestart"]
+CMD ["npm", "start"]
