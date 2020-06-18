@@ -9,7 +9,7 @@ First make sure [your local environment is setup appropriately](../README.md#pre
 
 The sample application consists of 2 services:
 * A stateless service `frontend`
-* A stateful Entity based service `js-shopping-cart`
+* A stateful Entity based service `shopping-cart`
 
 Additionally:
 * A `cloudstate` directory that contains proto definitions needed.
@@ -87,7 +87,7 @@ statefulstore.cloudstate.io/shopping-store created
 
 ### Shopping Cart Service
 ```
-cd ../js-shopping-cart
+cd ../shopping-cart
 nvm install
 nvm use
 npm install
@@ -107,10 +107,10 @@ Push the docker image to the registry
 docker push <my-registry>/shopping-cart:latest
 ```
 
-Deploy the image by changing into the deploy folder and editing `js-shopping-cart.yaml` to point to the docker image that you just pushed.
+Deploy the image by changing into the deploy folder and editing `shopping-cart.yaml` to point to the docker image that you just pushed.
 ```
 $ cd ../deploy
-$ cat js-shopping-cart.yaml
+$ cat shopping-cart.yaml
 apiVersion: cloudstate.io/v1alpha1
 kind: StatefulService
 metadata:
@@ -124,12 +124,12 @@ spec:
       name: shopping-store
   containers:
     - image:  lightbend-docker-registry.bintray.io/cloudstate-samples/frontend:latest # <-- Change this to your repo/image
-      name: js-shopping-cart
+      name: shopping-cart
 ```
 
 Deploy the service to your project namespace
 ```
-$ kubectl apply -f js-shopping-cart.yaml -n <project-name>
+$ kubectl apply -f shopping-cart.yaml -n <project-name>
 statefulservice.cloudstate.io/shopping-cart created
 ```
 
@@ -147,7 +147,7 @@ For example if we updated the shopping-cart docker image we would do the followi
 ```
 $ kubectl delete statefulservice shopping-cart -n <project-name>
 statefulservice.cloudstate.io "shopping-cart" deleted
-$ kubectl apply -f js-shopping-cart.yaml -n <project-name>    
+$ kubectl apply -f shopping-cart.yaml -n <project-name>
 statefulservice.cloudstate.io/shopping-cart created
 ```
 
