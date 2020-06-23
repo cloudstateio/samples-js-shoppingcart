@@ -100,14 +100,25 @@ statefulstore.cloudstate.io/shopping-store created
 ```
 
 ### Shopping Cart Service
+
 ```
 cd ../shopping-cart
+```
+
+#### Installing development dependencies (optional)
+
+Although this is not required for building and deploying the service, you might want to set up development environment
+```
 nvm install
 nvm use
 npm install
-npm run prestart
 ```
-For this service there is no web front end, so we only need to compile the `shoppingcart.proto` into the `user-function.desc`.
+After that you can run tests
+```
+npm test
+```
+
+#### Building a container image
 
 Build a docker image with the right registry and tag
 
@@ -120,6 +131,8 @@ Push the docker image to the registry
 ```
 docker push <my-registry>/shopping-cart:latest
 ```
+
+#### Deploying the service
 
 Deploy the image by changing into the deploy folder and editing `shopping-cart.yaml` to point to the docker image that you just pushed.
 ```
