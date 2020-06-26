@@ -15,7 +15,7 @@
  */
 
 const path = require("path");
-const should = require('chai').should();
+const should = require("chai").should();
 const grpc = require("grpc");
 const protoLoader = require("@grpc/proto-loader");
 const protobuf = require("protobufjs");
