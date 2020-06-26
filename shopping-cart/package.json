@@ -1,7 +1,7 @@
 {
   "name": "js-shopping-cart",
   "version": "0.1.0",
-  "description": "Sample CloudState event sourced shopping cart application",
+  "description": "Sample Cloudstate event sourced shopping cart application",
   "keywords": [
     "serverless",
     "cloudstate",
