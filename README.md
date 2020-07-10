@@ -127,7 +127,7 @@ $ docker push <username>/shopping-cart
 ```
 
 Use your image in place of the
-[https://github.com/cloudstateio/samples-ui-shoppingcart](https://github.com/cloudstateio/samples-ui-shoppingcart)
+lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart
 in step 7.
 
 ## Local Development
