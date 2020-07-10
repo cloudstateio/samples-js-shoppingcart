@@ -8,8 +8,8 @@
 
 ## Deploying
 
-The following steps uses `csctl` to deploy both the [shopping-cart frontend
-service](https://github.com/cloudstateio/samples-ui-shoppingcart) as well is the
+The following steps use `csctl` to deploy both the [shopping-cart frontend
+service](https://github.com/cloudstateio/samples-ui-shoppingcart) and the
 CloudState shopping-cart service defined in this repo. We'll be using the
 pre-built Docker images for the frontend and the shopping-cart, but feel free to
 build and use your own Docker images where appropriate.
@@ -39,7 +39,7 @@ You should see the project listed:
   sample-shopping-cart   Shopping Cart Sample   active   39ad1d96-466a-4d07-b826-b30509bda21b
 ```
 
-Wait until you get an email about your project being created and approved!
+Wait until you receive an email approving your project!
 
 ### 4. Set the current project
 
@@ -67,7 +67,7 @@ Wait for the store to be created
 $ watch csctl stores get
 ```
 
-Proceed when `STATUS` is `ready`. This will take approximately 5 minutes.
+Proceed when `STATUS` is `ready`, this can take some time.
 
 ### 7. Deploying the shopping-cart service
 
