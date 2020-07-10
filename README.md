@@ -134,7 +134,7 @@ in step 7.
 
 If you're self-hosting CloudState, the instructions for deploying the sample
 shopping cart application are in the
-[`deploy` directory](https://github.com/cloudstateio/samples-js-shoppingcart/blob/master/deploy/README.md)
+[`deploy` directory](./deploy/README.md)
 
 ## Local Development
 
