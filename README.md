@@ -6,7 +6,7 @@
 * [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
 * Install [csctl](https://docs.lbcs.io/getting-started/set-up-development-env.html)
 
-## Deploying
+## Deploying to Lightbend CloudState
 
 The following steps use `csctl` to deploy both the [shopping-cart frontend
 service](https://github.com/cloudstateio/samples-ui-shoppingcart) and the
@@ -129,6 +129,12 @@ $ docker push <username>/shopping-cart
 Use your image in place of the
 lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart
 in step 7.
+
+## Deploying to Kubernetes + CloudState
+
+If you're self-hosting CloudState, the instructions for deploying the sample
+shopping cart application are in the
+[`deploy` directory](https://github.com/cloudstateio/samples-js-shoppingcart/blob/master/deploy/README.md)
 
 ## Local Development
 
