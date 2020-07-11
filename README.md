@@ -144,11 +144,6 @@ The following assumes that you have completed the steps for setting up your loca
 
 * Install [nvm](https://github.com/nvm-sh/nvm#install--update-script) (node version manager)
   * We recommend v0.34.0 or later.  (Check with `nvm --version`)
-* You also need to install the protobuf compiler.
-  * We recommend using v3.0.0 or later.  (Check with `protoc --version`)
-  * Mac OS X `brew install protobuf`
-  * Linux `sudo apt install protobuf-compiler`
-  * Or [alternatively](https://developers.google.com/protocol-buffers/docs/downloads) (src and bins)
 
 ## Maintenance notes
 
