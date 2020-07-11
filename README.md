@@ -1,11 +1,6 @@
 
 # Cloudstate Sample Shopping Cart Application
 
-## Prerequisites
-
-* [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
-* Install [csctl](https://docs.lbcs.io/getting-started/set-up-development-env.html)
-
 ## Deploying to Lightbend Cloudstate
 
 The following steps use `csctl` to deploy both the [shopping-cart frontend
@@ -13,6 +8,11 @@ service](https://github.com/cloudstateio/samples-ui-shoppingcart) and the
 Cloudstate shopping-cart service defined in this repo. We'll be using the
 pre-built Docker images for the frontend and the shopping-cart, but feel free to
 build and use your own Docker images where appropriate.
+
+### Prerequisites
+
+* [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
+* Install [csctl](https://docs.lbcs.io/getting-started/set-up-development-env.html)
 
 ### 1. Login
 
