@@ -140,10 +140,22 @@ shopping cart application are in the
 
 ### Prerequisites
 
-The following assumes that you have completed the steps for setting up your local environment as well as creating an account and project.  If you have not done this you must follow the instructions here:
-
 * Install [nvm](https://github.com/nvm-sh/nvm#install--update-script) (node version manager)
   * We recommend v0.34.0 or later.  (Check with `nvm --version`)
+
+### Installing dependencies
+
+```shell
+$ nvm install
+$ nvm use
+$ npm install
+```
+
+### Running tests
+
+```shell
+$ npm test
+```
 
 ## Maintenance notes
 
