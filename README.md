@@ -44,9 +44,7 @@ Wait until you receive an email approving your project!
 ### 4. Set the current project
 
 ```shell
-$ export CSCTL_CURRENT_PROJECT=`csctl projects list -o json | \
-  jq -r '.[] | select(.friendly_name == "sample-shopping-cart") | .name / "/" | .[1]'`
-$ csctl config set project $CSCTL_CURRENT_PROJECT
+$ csctl config set project 39ad1d96-466a-4d07-b826-b30509bda21b
 ```
 
 ### 5. Deploy the frontend
