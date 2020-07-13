@@ -52,7 +52,7 @@ $ csctl config set project $CSCTL_CURRENT_PROJECT
 ### 5. Deploy the frontend
 
 ```shell
-$ csctl deploy frontend lightbend-docker-registry.bintray.io/cloudstate-samples/frontend
+$ csctl svc deploy frontend lightbend-docker-registry.bintray.io/cloudstate-samples/frontend
 ```
 
 ### 6. Create the store
@@ -72,7 +72,7 @@ Proceed when `STATUS` is `ready`, this can take some time.
 ### 7. Deploying the shopping-cart service
 
 ```shell
-$ csctl deploy \
+$ csctl svc deploy \
     shopping-cart \
     lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart \
     --with-store shopping-store
