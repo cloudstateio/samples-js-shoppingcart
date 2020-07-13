@@ -1,18 +1,18 @@
 
 # Cloudstate Sample Shopping Cart Application
 
-## Prerequisites
-
-* [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
-* Install [csctl](https://docs.lbcs.io/getting-started/set-up-development-env.html)
-
-## Deploying to Lightbend CloudState
+## Deploying to Lightbend Cloudstate
 
 The following steps use `csctl` to deploy both the [shopping-cart frontend
 service](https://github.com/cloudstateio/samples-ui-shoppingcart) and the
-CloudState shopping-cart service defined in this repo. We'll be using the
+Cloudstate shopping-cart service defined in this repo. We'll be using the
 pre-built Docker images for the frontend and the shopping-cart, but feel free to
 build and use your own Docker images where appropriate.
+
+### Prerequisites
+
+* [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
+* Install [csctl](https://docs.lbcs.io/getting-started/set-up-development-env.html)
 
 ### 1. Login
 
@@ -50,7 +50,7 @@ $ csctl config set project 39ad1d96-466a-4d07-b826-b30509bda21b
 ### 5. Deploy the frontend
 
 ```shell
-$ csctl deploy frontend lightbend-docker-registry.bintray.io/cloudstate-samples/frontend
+$ csctl svc deploy frontend lightbend-docker-registry.bintray.io/cloudstate-samples/frontend
 ```
 
 ### 6. Create the store
@@ -70,7 +70,7 @@ Proceed when `STATUS` is `ready`, this can take some time.
 ### 7. Deploying the shopping-cart service
 
 ```shell
-$ csctl deploy \
+$ csctl svc deploy \
     shopping-cart \
     lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart \
     --with-store shopping-store
@@ -128,9 +128,9 @@ Use your image in place of the
 lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart
 in step 7.
 
-## Deploying to Kubernetes + CloudState
+## Deploying to Kubernetes + Cloudstate
 
-If you're self-hosting CloudState, the instructions for deploying the sample
+If you're self-hosting Cloudstate, the instructions for deploying the sample
 shopping cart application are in the
 [`deploy` directory](./deploy/README.md)
 
@@ -138,15 +138,22 @@ shopping cart application are in the
 
 ### Prerequisites
 
-The following assumes that you have completed the steps for setting up your local environment as well as creating an account and project.  If you have not done this you must follow the instructions here:
-
 * Install [nvm](https://github.com/nvm-sh/nvm#install--update-script) (node version manager)
   * We recommend v0.34.0 or later.  (Check with `nvm --version`)
-* You also need to install the protobuf compiler.
-  * We recommend using v3.0.0 or later.  (Check with `protoc --version`)
-  * Mac OS X `brew install protobuf`
-  * Linux `sudo apt install protobuf-compiler`
-  * Or [alternatively](https://developers.google.com/protocol-buffers/docs/downloads) (src and bins)
+
+### Installing dependencies
+
+```shell
+$ nvm install
+$ nvm use
+$ npm install
+```
+
+### Running tests
+
+```shell
+$ npm test
+```
 
 ## Maintenance notes
 

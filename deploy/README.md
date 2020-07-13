@@ -1,9 +1,9 @@
 
-# Deploying to Kubernetes with CloudState
+# Deploying to Kubernetes with Cloudstate
 
 ## Prerequisites
 
-[Run CloudState](https://github.com/cloudstateio/cloudstate#run-cloudstate) in your Kubernetes cluster.
+[Run Cloudstate](https://github.com/cloudstateio/cloudstate#run-cloudstate) in your Kubernetes cluster.
 
 ## Quick install
 
