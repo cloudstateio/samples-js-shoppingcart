@@ -1,6 +1,37 @@
 
 # Cloudstate Sample Shopping Cart Application
 
+## Sample application structure
+
+The sample application consists of 2 services:
+* A stateless service `frontend`
+* A stateful entity-based service `shopping-cart`
+
+## Building container images
+
+All the latest container images are available publicly at `lightbend-docker-registry.bintray.io/cloudstate-samples`. But feel free to build your own images from sources.
+
+### Frontend service
+
+The `frontend` service is a frontend web application written in TypeScript.
+It is backed by a `stateless` service that will serve the compiled JavaScript, html and images. This service makes `grpc-web` calls directly to the other services to get the data that it needs.
+
+You can use the pre-built `lightbend-docker-registry.bintray.io/cloudstate-samples/frontend:latest` container image available at Lightbend Cloudstate samples repository.
+
+Alternatively, you can clone the [cloudstateio/samples-ui-shoppingcart](https://github.com/cloudstateio/samples-ui-shoppingcart) repository and follow the instructions there to build an image and deploy it to your own container image repository.
+
+### Shopping cart service
+
+You can use the pre-built `lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart:latest` container image available at Lightbend Cloudstate samples repository.
+
+Alternatively, you can build an image from the sources in the `shopping-cart` directory and push it to your own container image repository.
+
+```shell
+$ cd shopping-cart
+$ docker build -t <username>/shopping-cart .
+$ docker push <username>/shopping-cart
+```
+
 ## Deploying to Lightbend Cloudstate
 
 The following steps use `csctl` to deploy both the [shopping-cart frontend
@@ -115,18 +146,6 @@ In the example above, the URL would be:
 ```
 https://small-fire-5330.us-east1.apps.lbcs.io/pages/index.html
 ```
-
-## Building the Docker image
-
-```shell
-$ cd shopping-cart
-$ docker build -t <username>/shopping-cart .
-$ docker push <username>/shopping-cart
-```
-
-Use your image in place of the
-lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart
-in step 7.
 
 ## Deploying to Kubernetes + Cloudstate
 
