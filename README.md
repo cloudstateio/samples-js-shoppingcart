@@ -34,30 +34,30 @@ $ docker push <username>/shopping-cart
 
 ## Deploying to Lightbend Cloudstate
 
-The following steps use `csctl` to deploy both the [shopping-cart frontend
-service](https://github.com/cloudstateio/samples-ui-shoppingcart) and the
-Cloudstate shopping-cart service defined in this repo. We'll be using the
-pre-built Docker images for the frontend and the shopping-cart, but feel free to
-build and use your own Docker images where appropriate.
+The following steps use `csctl` to deploy the application to [Ligtbend Cloudstate](https://docs.lbcs.io/).
+
+If you're self-hosting Cloudstate, the instructions for deploying the sample shopping cart application are in the [`deploy` directory](./deploy/README.md)
 
 ### Prerequisites
 
-* [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
+* Get [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
 * Install [csctl](https://docs.lbcs.io/getting-started/set-up-development-env.html)
 
-### 1. Login
+### Login to Lightbend Cloudstate
 
 ```shell
 $ csctl auth login
 ```
 
-### 2. Create a new project
+### Create a new project
 
 ```shell
 $ csctl projects new sample-shopping-cart "Shopping Cart Sample"
 ```
 
-### 3. List projects
+Wait until you receive an email approving your project!
+
+List projects:
 
 ```shell
 $ csctl projects list
@@ -70,21 +70,24 @@ You should see the project listed:
   sample-shopping-cart   Shopping Cart Sample   active   39ad1d96-466a-4d07-b826-b30509bda21b
 ```
 
-Wait until you receive an email approving your project!
-
-### 4. Set the current project
+You can change the current project:
 
 ```shell
 $ csctl config set project 39ad1d96-466a-4d07-b826-b30509bda21b
 ```
 
-### 5. Deploy the frontend
+### Deploy the frontend service
+
+A pre-build container image of the frontend service is provided as `lightbend-docker-registry.bintray.io/cloudstate-samples/frontend`.
+If you have built your own container image, change the image in the following command to point to the one that you just pushed.
 
 ```shell
 $ csctl svc deploy frontend lightbend-docker-registry.bintray.io/cloudstate-samples/frontend
 ```
 
-### 6. Create the store
+### Create the store
+
+The shopping cart stateful service relies on a stateful store. Create the store with the following command:
 
 ```shell
 $ csctl store deploy shopping-store
@@ -98,7 +101,10 @@ $ watch csctl stores get
 
 Proceed when `STATUS` is `ready`, this can take some time.
 
-### 7. Deploying the shopping-cart service
+### Deploying the shopping cart service
+
+A pre-build container image of the frontend service is provided as `lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart`.
+If you have built your own container image, change the image in the following command to point to the one that you just pushed.
 
 ```shell
 $ csctl svc deploy \
@@ -111,10 +117,9 @@ Wait for the shopping cart service `STATUS` to be `ready`.
 
 ```shell
 $ watch csctl svc get
-
 ```
 
-### 8. Expose the frontend service
+### Expose the frontend service
 
 ```shell
 $ csctl svc expose frontend
@@ -128,7 +133,7 @@ Service 'frontend' was successfully exposed at: small-fire-5330.us-east1.apps.lb
 
 Make a note of the hostname since it will be used to expose other services on the same host.
 
-### 9. Expose the shopping-cart service
+### Expose the shopping-cart service
 
 ```shell
 $ csctl svc expose shopping-cart \
@@ -136,7 +141,7 @@ $ csctl svc expose shopping-cart \
   --uri-prefix=/com.example.shoppingcart.ShoppingCart/
 ```
 
-### 10. Visit the deployed shopping-cart frontend
+### Visit the deployed shopping-cart frontend
 
 The sample shopping cart is live. The frontend lives on the hostname previously
 generated when deploying the frontend. Append `/pages/index.html` to the
@@ -146,12 +151,6 @@ In the example above, the URL would be:
 ```
 https://small-fire-5330.us-east1.apps.lbcs.io/pages/index.html
 ```
-
-## Deploying to Kubernetes + Cloudstate
-
-If you're self-hosting Cloudstate, the instructions for deploying the sample
-shopping cart application are in the
-[`deploy` directory](./deploy/README.md)
 
 ## Local Development
 
