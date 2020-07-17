@@ -73,7 +73,7 @@ You should see the project listed:
 You can change the current project:
 
 ```shell
-$ csctl config set project 39ad1d96-466a-4d07-b826-b30509bda21b
+$ csctl config set project sample-shopping-cart
 ```
 
 ### Deploy the frontend service
