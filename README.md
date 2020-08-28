@@ -3,8 +3,8 @@
 
 ## Sample application structure
 
-The sample application consists of two services:
-* A stateless service `frontend`
+The sample application consists of two parts:
+* A static html `frontend`
 * A stateful entity-based service `shopping-cart`
 
 ## Building container images
@@ -13,12 +13,14 @@ All the latest container images are available publicly at `lightbend-docker-regi
 
 ### Frontend service
 
-The `frontend` service is a frontend web application written in TypeScript.
-It is backed by a `stateless` service that will serve the compiled JavaScript, html and images. This service makes `grpc-web` calls directly to the other services to get the data that it needs.
+The `frontend` service is a web application written in TypeScript.
+It compiles into static JavaScript, html and images. This web-app makes `grpc-web` calls directly to the `shopping-cart` services to get the data that it needs.
 
-You can use the pre-built `lightbend-docker-registry.bintray.io/cloudstate-samples/frontend:latest` container image available at the Lightbend Cloudstate samples repository.
+You can use our statically hosted page located here [https://static.cloudstate.com/js-shopping-cart/index.html](https://static.cloudstate.com/js-shopping-cart/index.html)
 
-Alternatively, you can clone the [cloudstateio/samples-ui-shoppingcart](https://github.com/cloudstateio/samples-ui-shoppingcart) repository and follow the instructions there to build an image and deploy it to your own container image repository.
+This page will ask you for your exposed `shopping-cart` service hostname.  The page then makes `grpc-web` calls against that hostname.
+
+Alternatively, you can clone the [cloudstateio/samples-ui-shoppingcart](https://github.com/cloudstateio/samples-ui-shoppingcart) repository and follow the instructions there to build and deploy to your own hosting provider.
 
 ### Shopping cart service
 
@@ -76,15 +78,6 @@ You can change the current project:
 $ csctl config set project sample-shopping-cart
 ```
 
-### Deploy the frontend service
-
-A pre-built container image of the frontend service is provided as `lightbend-docker-registry.bintray.io/cloudstate-samples/frontend`.
-If you have built your own container image, change the image in the following command to point to the one that you just pushed.
-
-```shell
-$ csctl svc deploy frontend lightbend-docker-registry.bintray.io/cloudstate-samples/frontend
-```
-
 ### Deploying the shopping cart service
 
 A pre-built container image of the shopping cart service is provided as `lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart-js`.
@@ -102,37 +95,29 @@ Wait for the shopping cart service `STATUS` to be `ready`.
 $ csctl svc get
 ```
 
-### Expose the frontend service
+### Expose the shopping-cart service
 
 ```shell
-$ csctl svc expose frontend
+$ csctl svc expose shopping-cart --enable-cors
 ```
 
 The output will look like this:
 
 ```shell
-Service 'frontend' was successfully exposed at: small-fire-5330.us-east1.apps.lbcs.io
+Service 'shopping-cart' was successfully exposed at: small-fire-5330.us-east1.apps.lbcs.io
 ```
 
-Make a note of the hostname since it will be used to expose other services on the same host.
+Make a note of the hostname since it will be used by the `frontend` static html page.
 
-### Expose the shopping-cart service
+### Visit the shopping-cart web frontend
 
-```shell
-$ csctl svc expose shopping-cart \
-  --hostname small-fire-5330.us-east1.apps.lbcs.io \
-  --uri-prefix=/com.example.shoppingcart.ShoppingCart/
+Open a browser and go to the following url: [https://static.cloudstate.com/js-shopping-cart/index.html](https://static.cloudstate.com/js-shopping-cart/index.html)
+
+Once the page has loaded your will see a dialog prompting you to enter the hostname for your exposed (and CORS enabled) `shopping-cart` service.
+
+In the example above, the hostname would be:
 ```
-
-### Visit the deployed shopping-cart frontend
-
-The sample shopping cart is live. The frontend lives on the hostname previously
-generated when deploying the frontend. Append `/pages/index.html` to the
-provided hostname to see the shopping-cart frontend.
-
-In the example above, the URL would be:
-```
-https://small-fire-5330.us-east1.apps.lbcs.io/pages/index.html
+small-fire-5330.us-east1.apps.lbcs.io
 ```
 
 ## Local Development
