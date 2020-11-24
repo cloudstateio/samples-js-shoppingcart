@@ -36,25 +36,25 @@ $ docker push <username>/shopping-cart
 
 ## Deploying to Lightbend Cloudstate
 
-The following steps use `csctl` to deploy the application to [Lightbend Cloudstate](https://docs.lbcs.io/).
+The following steps use `akkasls` to deploy the application to [Lightbend Cloudstate](https://docs.lbcs.io/).
 
 If you're self-hosting Cloudstate, the instructions for deploying the sample shopping cart application are in the [`deploy` directory](./deploy/README.md)
 
 ### Prerequisites
 
 * Get [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
-* Install [csctl](https://docs.lbcs.io/getting-started/set-up-development-env.html)
+* Install [akkasls](https://docs.lbcs.io/getting-started/set-up-development-env.html)
 
 ### Login to Lightbend Cloudstate
 
 ```shell
-$ csctl auth login
+$ akkasls auth login
 ```
 
 ### Create a new project
 
 ```shell
-$ csctl projects new sample-shopping-cart "Shopping Cart Sample"
+$ akkasls projects new sample-shopping-cart "Shopping Cart Sample"
 ```
 
 Wait until you receive an email approving your project!
@@ -62,7 +62,7 @@ Wait until you receive an email approving your project!
 List projects:
 
 ```shell
-$ csctl projects list
+$ akkasls projects list
 ```
 
 You should see the project listed:
@@ -75,7 +75,7 @@ You should see the project listed:
 You can change the current project:
 
 ```shell
-$ csctl config set project sample-shopping-cart
+$ akkasls config set project sample-shopping-cart
 ```
 
 ### Deploying the shopping cart service
@@ -84,7 +84,7 @@ A pre-built container image of the shopping cart service is provided as `lightbe
 If you have built your own container image, change the image in the following command to point to the one that you just pushed.
 
 ```shell
-$ csctl svc deploy \
+$ akkasls svc deploy \
     shopping-cart \
     lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart-js
 ```
@@ -92,13 +92,13 @@ $ csctl svc deploy \
 Wait for the shopping cart service `STATUS` to be `ready`.
 
 ```shell
-$ csctl svc get
+$ akkasls svc get
 ```
 
 ### Expose the shopping-cart service
 
 ```shell
-$ csctl svc expose shopping-cart --enable-cors
+$ akkasls svc expose shopping-cart --enable-cors
 ```
 
 The output will look like this:
