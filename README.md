@@ -36,14 +36,14 @@ $ docker push <username>/shopping-cart
 
 ## Deploying to Lightbend Cloudstate
 
-The following steps use `akkasls` to deploy the application to [Lightbend Cloudstate](https://docs.lbcs.io/).
+The following steps use `akkasls` to deploy the application to [Lightbend Cloudstate](https://docs.cloudstate.com/).
 
 If you're self-hosting Cloudstate, the instructions for deploying the sample shopping cart application are in the [`deploy` directory](./deploy/README.md)
 
 ### Prerequisites
 
-* Get [Your Lightbend Cloudstate Account](https://docs.lbcs.io/gettingstarted/account.html)
-* Install [akkasls](https://docs.lbcs.io/getting-started/set-up-development-env.html)
+* Get [Your Lightbend Cloudstate Account](https://docs.cloudstate.com/getting-started/lightbend-account.html)
+* Install [akkasls](https://docs.cloudstate.com/getting-started/set-up-development-env.html)
 
 ### Login to Lightbend Cloudstate
 
