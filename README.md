@@ -24,7 +24,7 @@ Alternatively, you can clone the [cloudstateio/samples-ui-shoppingcart](https://
 
 ### Shopping cart service
 
-You can use the pre-built `lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart-js:latest` container image available at the Lightbend Cloudstate samples repository.
+You can use the pre-built `lightbend-docker-registry.bintray.io/cloudstate-samples/shopping-cart-js:latest` container image.
 
 Alternatively, you can build an image from the sources in the `shopping-cart` directory and push it to your own container image repository.
 
@@ -34,18 +34,18 @@ $ docker build -t <username>/shopping-cart .
 $ docker push <username>/shopping-cart
 ```
 
-## Deploying to Lightbend Cloudstate
+## Deploying to Akka Serverless
 
-The following steps use `akkasls` to deploy the application to [Lightbend Cloudstate](https://docs.cloudstate.com/).
+The following steps use `akkasls` to deploy the application to [Akka Serverless](https://docs.cloudstate.com/).
 
 If you're self-hosting Cloudstate, the instructions for deploying the sample shopping cart application are in the [`deploy` directory](./deploy/README.md)
 
 ### Prerequisites
 
-* Get [Your Lightbend Cloudstate Account](https://docs.cloudstate.com/getting-started/lightbend-account.html)
+* Get [Your Akka Serverless Account](https://docs.cloudstate.com/getting-started/lightbend-account.html)
 * Install [akkasls](https://docs.cloudstate.com/getting-started/set-up-development-env.html)
 
-### Login to Lightbend Cloudstate
+### Login to Akka Serverless
 
 ```shell
 $ akkasls auth login
