@@ -33,7 +33,7 @@ The `frontend` service is a frontend web application written in TypeScript. It i
 
 #### Getting container image ready
 
-You can use the pre-built `lightbend-docker-registry.bintray.io/cloudstate-samples/frontend:latest` container image available at Lightbend Cloudstate samples repository.
+You can use the pre-built `lightbend-docker-registry.bintray.io/cloudstate-samples/frontend:latest` container image.
 
 Alternatively, you can clone the [cloudstateio/samples-ui-shoppingcart](https://github.com/cloudstateio/samples-ui-shoppingcart) repository and follow the instructions there to build an image and deploy it to your own container image repository.
 
