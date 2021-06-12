@@ -111,7 +111,7 @@ Make a note of the hostname since it will be used by the `frontend` static html 
 
 ### Visit the shopping-cart web frontend
 
-Open a browser and go to the following url: [https://static.cloudstate.com/js-shopping-cart/index.html](https://static.cloudstate.com/js-shopping-cart/index.html)
+Open a browser and go to the following url: [https://static.akkaserverless.com/js-shopping-cart/index.html](https://static.akkaserverless.com/js-shopping-cart/index.html)
 
 Once the page has loaded your will see a dialog prompting you to enter the hostname for your exposed (and CORS enabled) `shopping-cart` service.
 
