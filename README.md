@@ -16,7 +16,7 @@ All the latest container images are available publicly at `lightbend-docker-regi
 The `frontend` service is a web application written in TypeScript.
 It compiles into static JavaScript, html and images. This web-app makes `grpc-web` calls directly to the `shopping-cart` services to get the data that it needs.
 
-You can use our statically hosted page located here [https://static.cloudstate.com/js-shopping-cart/index.html](https://static.cloudstate.com/js-shopping-cart/index.html)
+You can use our statically hosted page located here [https://static.akkaserverless.com/js-shopping-cart/index.html](https://static.akkaserverless.com/js-shopping-cart/index.html)
 
 This page will ask you for your exposed `shopping-cart` service hostname.  The page then makes `grpc-web` calls against that hostname.
 
